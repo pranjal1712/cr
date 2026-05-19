@@ -1,0 +1,1069 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+:root {
+  --bg-primary: #08071a; /* Magical starry midnight blue */
+  --bg-secondary: #140821; /* Luxurious royal violet plum */
+  --bg-glass: rgba(18, 10, 30, 0.6); /* Translucent dark glass for rich contrast */
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --color-text-primary: #f3f0f7;
+  --color-text-muted: #a39bb4;
+  
+  /* Vibrant Neon Colors */
+  --neon-blue: #00f2ff;
+  --neon-pink: #ff007f;
+  --neon-green: #39ff14;
+  --neon-yellow: #ffe600;
+  
+  --shadow-blue: 0 0 15px rgba(0, 242, 255, 0.3);
+  --shadow-pink: 0 0 15px rgba(255, 0, 127, 0.3);
+  --shadow-green: 0 0 15px rgba(57, 255, 20, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--color-text-primary);
+  overflow-x: hidden;
+  min-height: 100vh;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(255, 0, 127, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(0, 242, 255, 0.06) 0%, transparent 50%),
+    linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  background-attachment: fixed;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-pink);
+  box-shadow: var(--shadow-pink);
+}
+
+/* Glassmorphism Styles */
+.glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass);
+  border-radius: 20px;
+}
+
+.glass-interactive {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass-interactive:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.shake {
+  animation: shake 0.4s ease-in-out;
+  border-color: var(--neon-pink) !important;
+  box-shadow: 0 0 20px rgba(255, 0, 127, 0.4) !important;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.float-slow {
+  animation: float 6s ease-in-out infinite;
+}
+
+.float-medium {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.3;
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.1);
+  }
+  50% {
+    opacity: 0.8;
+    box-shadow: 0 0 25px rgba(0, 242, 255, 0.4);
+  }
+}
+
+.pulse-glow-blue {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Confetti Styles */
+.confetti-particle {
+  position: absolute;
+  top: -10px;
+  border-radius: 50%;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(105vh) rotate(360deg);
+  }
+}
+
+/* Surprise Letter */
+.letter-envelope {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  height: 300px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.envelope {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #1c142c;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  transition: transform 0.6s ease;
+}
+
+.letter-envelope:hover .envelope {
+  transform: rotateY(-5deg);
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 250px solid transparent;
+  border-right: 250px solid transparent;
+  border-top: 150px solid rgba(255, 0, 127, 0.15);
+  transform-origin: top;
+  transition: transform 0.6s ease;
+  z-index: 3;
+}
+
+.letter-envelope.open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.letter {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  right: 20px;
+  height: 250px;
+  background: linear-gradient(135deg, #1b0e33, #0a0512);
+  border: 1px solid var(--border-glass);
+  border-radius: 8px;
+  padding: 24px;
+  color: var(--color-text-primary);
+  font-family: 'Playfair Display', serif;
+  transform: translateY(0);
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+}
+
+.letter-envelope.open .letter {
+  transform: translateY(-120px) scale(1.05);
+  height: 380px;
+  z-index: 5;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+  border-color: var(--neon-pink);
+}
+
+/* Dialpad custom states */
+.dial-btn {
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+.dial-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.3s ease;
+  border-radius: 50%;
+}
+
+.dial-btn:active::after {
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 0s;
+}
+
+/* Fonts and Text Customizations */
+.font-serif {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Custom glow utility */
+.glow-pink-text {
+  text-shadow: 0 0 10px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.2);
+}
+
+.glow-blue-text {
+  text-shadow: 0 0 10px rgba(0, 242, 255, 0.6), 0 0 20px rgba(0, 242, 255, 0.2);
+}
+
+.glow-green-text {
+  text-shadow: 0 0 10px rgba(57, 255, 20, 0.6), 0 0 20px rgba(57, 255, 20, 0.2);
+}
+
+/* ==========================================
+   LIGHTWEIGHT VANILLA CSS UTILITY LAYER
+   ========================================== */
+
+/* Flex & Grid Utilities */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-row { flex-direction: row; }
+.flex-grow { flex-grow: 1; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.grid { display: grid; }
+.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.gap-4 { gap: 1rem; }
+.gap-8 { gap: 2rem; }
+
+@media (min-width: 768px) {
+  .md\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .md\:col-span-5 { grid-column: span 5 / span 5; }
+  .md\:col-span-7 { grid-column: span 7 / span 7; }
+  .md\:pr-6 { padding-right: 1.5rem; }
+}
+
+/* Spacing Utilities */
+.space-y-6 > * + * { margin-top: 1.5rem; }
+.space-y-3 > * + * { margin-top: 0.75rem; }
+.space-x-3 > * + * { margin-left: 0.75rem; }
+.space-x-4 > * + * { margin-left: 1rem; }
+.space-x-2 > * + * { margin-left: 0.5rem; }
+.space-x-2\.5 > * + * { margin-left: 0.625rem; }
+
+/* Width & Height Utilities */
+.w-full { width: 100%; }
+.w-3 { width: 0.75rem; } .h-3 { height: 0.75rem; }
+.w-4 { width: 1rem; } .h-4 { height: 1rem; }
+.w-5 { width: 1.25rem; } .h-5 { height: 1.25rem; }
+.w-6 { width: 1.5rem; } .h-6 { height: 1.5rem; }
+.w-8 { width: 2rem; } .h-8 { height: 2rem; }
+.w-16 { width: 4rem; } .h-16 { height: 4rem; }
+.w-24 { width: 6rem; } .h-24 { height: 6rem; }
+.w-32 { width: 8rem; } .h-32 { height: 8rem; }
+.w-40 { width: 10rem; } .h-40 { height: 10rem; }
+.max-w-6xl { max-width: 72rem; }
+.max-w-md { max-width: 28rem; }
+.max-w-5xl { max-width: 64rem; }
+.max-w-xl { max-width: 36rem; }
+.max-w-lg { max-width: 32rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.aspect-square { aspect-ratio: 1 / 1; }
+.aspect-\[4\/3\] { aspect-ratio: 4 / 3; }
+.min-h-screen { min-height: 100vh; }
+.min-height-\[80vh\] { min-height: 80vh; }
+
+/* Padding & Margin Utilities */
+.p-2 { padding: 0.5rem; }
+.p-3 { padding: 0.75rem; }
+.p-4 { padding: 1rem; }
+.p-5 { padding: 1.25rem; }
+.p-6 { padding: 1.5rem; }
+.p-8 { padding: 2rem; }
+.py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+.py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+.px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+.px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.px-2\.5 { padding-left: 0.625rem; padding-right: 0.625rem; }
+.py-1\.5 { padding-top: 0.375rem; padding-bottom: 0.375rem; }
+.mt-0\.5 { margin-top: 0.125rem; }
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 0.75rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mb-12 { margin-bottom: 3rem; }
+.mb-16 { margin-bottom: 4rem; }
+.pb-2 { padding-bottom: 0.5rem; }
+.pr-1 { padding-right: 0.25rem; }
+
+/* Typography Utilities */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-xs { font-size: 0.75rem; line-height: 1rem; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.text-base { font-size: 1rem; line-height: 1.5rem; }
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+.text-2xl { font-size: 1.5rem; line-height: 2rem; }
+.text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+.text-5xl { font-size: 3rem; line-height: 1; }
+.text-7xl { font-size: 4.5rem; line-height: 1; }
+.font-bold { font-weight: 700; }
+.font-semibold { font-weight: 600; }
+.font-medium { font-weight: 500; }
+.font-extrabold { font-weight: 800; }
+.uppercase { text-transform: uppercase; }
+.tracking-widest { letter-spacing: 0.1em; }
+.tracking-wider { letter-spacing: 0.05em; }
+.tracking-tighter { letter-spacing: -0.05em; }
+.italic { font-style: italic; }
+.not-italic { font-style: normal; }
+.leading-tight { line-height: 1.25; }
+.leading-relaxed { line-height: 1.625; }
+
+/* Colors, Backgrounds & Borders Utilities */
+.text-pink-500 { color: var(--neon-pink); }
+.text-pink-400 { color: #ff3399; }
+.text-blue-400 { color: var(--neon-blue); }
+.text-green-400 { color: var(--neon-green); }
+.text-yellow-400 { color: var(--neon-yellow); }
+.text-white { color: #ffffff; }
+.text-color-text-muted { color: var(--color-text-muted); }
+.text-color-text-primary { color: var(--color-text-primary); }
+
+.bg-pink-500\/5 { background-color: rgba(255, 0, 127, 0.05); }
+.bg-pink-500\/10 { background-color: rgba(255, 0, 127, 0.1); }
+.bg-blue-500\/5 { background-color: rgba(0, 242, 255, 0.05); }
+.bg-blue-500\/10 { background-color: rgba(0, 242, 255, 0.1); }
+.bg-green-500\/10 { background-color: rgba(57, 255, 20, 0.1); }
+.bg-white\/\[0\.02\] { background-color: rgba(255, 255, 255, 0.02); }
+.bg-white\/\[0\.08\] { background-color: rgba(255, 255, 255, 0.08); }
+.bg-white\/\[0\.01\] { background-color: rgba(255, 255, 255, 0.01); }
+.bg-white\/\[0\.05\] { background-color: rgba(255, 255, 255, 0.05); }
+.bg-white\/10 { background-color: rgba(255, 255, 255, 0.1); }
+.bg-black\/20 { background-color: rgba(0, 0, 0, 0.2); }
+.bg-black\/40 { background-color: rgba(0, 0, 0, 0.4); }
+.bg-black\/60 { background-color: rgba(0, 0, 0, 0.6); }
+
+.border-white\/5 { border-color: rgba(255, 255, 255, 0.05); }
+.border-white\/10 { border-color: rgba(255, 255, 255, 0.1); }
+.border-white\/15 { border-color: rgba(255, 255, 255, 0.15); }
+.border-pink-500\/20 { border-color: rgba(255, 0, 127, 0.2); }
+.border-pink-500\/50 { border-color: rgba(255, 0, 127, 0.5); }
+.border-blue-400\/20 { border-color: rgba(0, 242, 255, 0.2); }
+.border-blue-500\/15 { border-color: rgba(0, 242, 255, 0.15); }
+.border-blue-500\/30 { border-color: rgba(0, 242, 255, 0.3); }
+.border-green-500\/20 { border-color: rgba(57, 255, 20, 0.2); }
+
+.shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+.shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+.shadow-blue-500\/20 { box-shadow: 0 10px 15px -3px rgba(0, 242, 255, 0.2); }
+.shadow-blue-500\/30 { box-shadow: 0 10px 15px -3px rgba(0, 242, 255, 0.3); }
+
+.rounded-lg { border-radius: 0.5rem; }
+.rounded-xl { border-radius: 0.75rem; }
+.rounded-full { border-radius: 9999px; }
+.shrink-0 { flex-shrink: 0; }
+.overflow-hidden { overflow: hidden; }
+
+/* Custom Keyframe Animations Utilities */
+.animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+
+.animate-bounce { animation: bounce 1s infinite; }
+@keyframes bounce {
+  0%, 100% { transform: translateY(-25%); animation-timing-function: cubic-bezier(0.8,0,1,1); }
+  50% { transform: none; animation-timing-function: cubic-bezier(0,0,0.2,1); }
+}
+
+.animate-ping { animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite; }
+@keyframes ping { 75%, 100% { transform: scale(2); opacity: 0; } }
+
+.animate-fadeIn { animation: fadeIn 0.8s ease-out forwards; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.animate-spin-slow { animation: spin 12s linear infinite; }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* Chrome, Safari and general mobile auto-zoom and scaling prevention */
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* ==========================================
+   VINTAGE SCRAPBOOK THEME STYLES
+   ========================================== */
+
+/* Scrapbook card viewport wrapper */
+.vintage-card-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1.5rem;
+}
+
+/* Master card container mirroring the user's reference image exactly */
+.vintage-card {
+  width: 100%;
+  max-width: 900px;
+  min-height: 540px;
+  background-color: #a84457;
+  border: 12px solid #ede0cd;
+  border-radius: 24px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(0, 0, 0, 0.35);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Position Utilities to ensure correct layered overlapping */
+.relative { position: relative; }
+.absolute { position: absolute; }
+.inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+.z-10 { z-index: 10; }
+.z-20 { z-index: 20; }
+.z-30 { z-index: 30; }
+.pointer-events-none { pointer-events: none; }
+
+
+
+/* Responsive stack on mobile screens */
+@media (max-width: 767px) {
+  .vintage-card {
+    grid-template-columns: 1fr;
+    aspect-ratio: auto;
+    min-height: auto;
+  }
+}
+
+/* Torn maroon paper layer (top-left) */
+.maroon-tear {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 192px;
+  height: 80px;
+  background-color: #6b2533;
+  clip-path: polygon(0% 0%, 100% 0%, 75% 60%, 40% 45%, 0% 100%);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+}
+
+/* Torn music sheet paper layer (bottom-left) */
+.music-tear {
+  position: absolute;
+  bottom: -10px;
+  left: -10px;
+  width: 256px;
+  height: 144px;
+  background-color: #ede0cd;
+  transform: rotate(-8deg);
+  clip-path: polygon(0% 25%, 35% 15%, 65% 32%, 100% 20%, 95% 100%, 0% 100%);
+  border-top: 2px solid rgba(0, 0, 0, 0.08);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+/* Heart-shaped lacy frame container with floating and glowing heartbeat */
+.heart-lace-container {
+  position: relative;
+  width: 330px;
+  height: 330px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: heart-float-glow 4.5s ease-in-out infinite;
+}
+
+@keyframes heart-float-glow {
+  0%, 100% {
+    transform: translateY(0);
+    filter: drop-shadow(0 6px 12px rgba(217, 59, 79, 0.45)) drop-shadow(0 0 12px rgba(237, 224, 205, 0.2));
+  }
+  50% {
+    transform: translateY(-8px);
+    filter: drop-shadow(0 14px 28px rgba(217, 59, 79, 0.75)) drop-shadow(0 0 28px rgba(237, 224, 205, 0.55));
+  }
+}
+
+/* Cursive handwritten header */
+.vintage-header {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 2.25rem;
+  color: white;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Indicator digit boxes */
+.passcode-container {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+}
+
+.passcode-box {
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem;
+  color: white;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.passcode-box.active {
+  border-color: white;
+  background-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.passcode-box.error {
+  border-color: #f43f5e;
+  background-color: rgba(244, 63, 94, 0.1);
+  box-shadow: 0 0 15px rgba(244, 63, 94, 0.3);
+}
+
+/* Circular Keypad layout */
+.vintage-keypad {
+  width: 100%;
+  max-width: 280px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Round white button outlines matching image precisely */
+.vintage-btn {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.04);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin: 0 auto;
+  outline: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.vintage-btn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.8);
+  transform: scale(1.05);
+}
+
+.vintage-btn:active {
+  transform: scale(0.95);
+}
+
+/* Underline beneath the digit */
+.vintage-digit {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.75);
+  line-height: 0.85;
+  padding-bottom: 2px;
+  display: inline-block;
+}
+
+/* Clear digits utility button */
+.clear-action-btn {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clear-action-btn:hover:not(:disabled) {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.clear-action-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ==========================================
+   DYNAMIC FLOATING BIRTHDAY PARTICLES
+   ========================================== */
+.floating-birthday-particle {
+  bottom: -50px;
+  position: absolute;
+  pointer-events: none;
+  animation-name: float-up;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  opacity: 0;
+  z-index: 0;
+  user-select: none;
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.55;
+  }
+  90% {
+    opacity: 0.55;
+  }
+  100% {
+    transform: translateY(-110vh) translateX(var(--drift-x, 20px)) rotate(var(--rotation, 360deg));
+    opacity: 0;
+  }
+}
+/* ==========================================
+   ENVELOPE HEART SPARKS CELEBRATION
+   ========================================== */
+.envelope-heart-spark {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  animation: heart-burst-fade 2.2s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes heart-burst-fade {
+  0% {
+    transform: translate(0, 0) scale(0.4) rotate(0deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate(var(--tx, 0), var(--ty, -180px)) scale(1.1) rotate(var(--rot, 35deg));
+    opacity: 0;
+  }
+}
+
+/* ==========================================
+   KEYPAD CLICK EXPAND RIPPLES
+   ========================================== */
+.vintage-btn {
+  position: relative;
+  overflow: hidden; /* Keep ripples inside circles */
+}
+
+.keypad-btn-ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: key-ripple-expand 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes key-ripple-expand {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0.85;
+  }
+  100% {
+    width: 120px;
+    height: 120px;
+    opacity: 0;
+  }
+}
+
+/* Vintage romantic cursive quote styling */
+.vintage-quote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: #ede0cd; /* Cream color matching borders */
+  margin-top: 0.5rem;
+  margin-bottom: 1.25rem;
+  max-width: 280px;
+  line-height: 1.55;
+  opacity: 0.95;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.45);
+  font-weight: 500;
+  text-align: center;
+  z-index: 10;
+  animation: fadeIn 1.5s ease-out;
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================
+   KAWAII DOODLE CELEBRATION STYLES
+   ========================================== */
+
+/* Kawaii Grid Paper Page */
+.kawaii-grid-page {
+  background-color: #fcf9f5; /* Soft warm ivory cream */
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+  background-size: 22px 22px;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  color: #000000; /* Rich solid black for retro doodle style */
+}
+
+/* Retro Bubble text styles matching reference image exactly */
+.bubble-text-white {
+  font-family: 'DynaPuff', 'Fredoka', 'Outfit', sans-serif;
+  font-weight: 900;
+  font-size: 4.5rem;
+  color: #FFFFFF;
+  -webkit-text-stroke: 3px #000000;
+  text-shadow: 4.5px 4.5px 0px #000000;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.bubble-text-pink {
+  font-family: 'DynaPuff', 'Fredoka', 'Outfit', sans-serif;
+  font-weight: 900;
+  font-size: 4.5rem;
+  color: #fd728f; /* Beautiful pastel strawberry pink */
+  -webkit-text-stroke: 3px #000000;
+  text-shadow: 4.5px 4.5px 0px #000000;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+/* Custom Kawaii Pill Shapes */
+.kawaii-pill-date {
+  background-color: #fd728f;
+  border: 2.5px solid #000000;
+  border-radius: 9999px;
+  padding: 0.5rem 1.75rem;
+  color: #FFFFFF;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  box-shadow: 3.5px 3.5px 0px #000000;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.kawaii-pill-button {
+  background-color: #FFFFFF;
+  border: 2.5px solid #000000;
+  border-radius: 9999px;
+  padding: 0.45rem 1.4rem;
+  color: #000000;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 0.95rem;
+  box-shadow: 3px 3px 0px #000000;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.kawaii-pill-button:hover {
+  transform: translate(-1.5px, -1.5px);
+  box-shadow: 4.5px 4.5px 0px #000000;
+  background-color: #fff3f5;
+}
+
+.kawaii-pill-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #000000;
+}
+
+.kawaii-pill-cutie {
+  background-color: #fd728f;
+  border: 2px solid #000000;
+  border-radius: 9999px;
+  padding: 0.35rem 1.25rem;
+  color: #FFFFFF;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 0.9rem;
+  box-shadow: 2.5px 2.5px 0px #000000;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Portrait Circle Frame with springy scale & shadow highlight */
+.kawaii-circle-frame {
+  width: 290px;
+  height: 290px;
+  border-radius: 50%;
+  border: 3px solid #000000;
+  background-color: #FFFFFF;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 5px 5px 0px #000000;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+.kawaii-circle-frame:hover {
+  transform: scale(1.05) rotate(3deg);
+  box-shadow: 8px 8px 0px #fd728f;
+}
+
+/* Modal Overlay Styling for Envelope surprize letter */
+.kawaii-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(8, 7, 26, 0.75);
+  backdrop-filter: blur(6px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.kawaii-modal-container {
+  background-color: #fcf9f5;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 20px 20px;
+  border: 3px solid #000000;
+  border-radius: 24px;
+  box-shadow: 6px 6px 0px #000000;
+  width: 100%;
+  max-width: 580px;
+  padding: 2.25rem 2rem 2.25rem 2rem;
+  position: relative;
+  box-sizing: border-box;
+  animation: scaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+}
+
+@keyframes scaleUp {
+  0% { transform: scale(0.92); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.kawaii-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #FFFFFF;
+  border: 2px solid #000000;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-family: 'Outfit', sans-serif;
+  color: #000000;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px #000000;
+  transition: all 0.15s ease;
+}
+
+.kawaii-modal-close:hover {
+  background-color: #fff3f5;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px #000000;
+}
+
+.kawaii-modal-close:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px #000000;
+}
+
+/* SPRINGY ENTRANCE KEYFRAMES ANIMATIONS */
+@keyframes slideUpKawaii {
+  0% {
+    transform: translateY(140px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDownKawaii {
+  0% {
+    transform: translateY(-140px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleInKawaii {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  75% {
+    transform: scale(1.18);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up-kawaii {
+  animation: slideUpKawaii 1.4s cubic-bezier(0.175, 0.885, 0.32, 1.18) both;
+}
+
+.animate-slide-down-kawaii {
+  animation: slideDownKawaii 1.4s cubic-bezier(0.175, 0.885, 0.32, 1.18) both;
+}
+
+.animate-scale-in-kawaii {
+  animation: scaleInKawaii 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+/* GENTLE BUNTING ROPE SWAY ANIMATIONS */
+@keyframes buntingSwayLeft {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+@keyframes buntingSwayRight {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-2deg);
+  }
+}
+
+.animate-bunting-sway-left {
+  animation: buntingSwayLeft 6s ease-in-out infinite;
+  transform-origin: top left;
+}
+
+.animate-bunting-sway-right {
+  animation: buntingSwayRight 6s ease-in-out infinite;
+  transform-origin: top right;
+}
+
+/* INTERACTIVE ADD-ONS & MICRO-ANIMATIONS */
+@keyframes kawaiiWiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg) scale(1.03); }
+  75% { transform: rotate(3deg) scale(1.03); }
+}
+
+.kawaii-pill-button:hover {
+  animation: kawaiiWiggle 0.45s ease infinite;
+  background-color: #fff3f5 !important;
+}
+
+@keyframes bubblePulse {
+  0%, 100% {
+    transform: scale(1);
+    text-shadow: 4.5px 4.5px 0px #000000;
+  }
+  50% {
+    transform: scale(1.02);
+    text-shadow: 5px 5px 0px #000000, 0 0 15px rgba(253, 114, 143, 0.3);
+  }
+}
+
+.bubble-pulse-neon {
+  display: inline-block;
+  animation: bubblePulse 3s ease-in-out infinite;
+}
+
+@keyframes smileySpin {
+  0% { transform: scale(1) rotate(0deg); }
+  35% { transform: scale(1.35) rotate(-15deg); }
+  75% { transform: scale(1.35) rotate(375deg); }
+  100% { transform: scale(1) rotate(360deg); }
+}
+
+.smiley-click-spin {
+  animation: smileySpin 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+
