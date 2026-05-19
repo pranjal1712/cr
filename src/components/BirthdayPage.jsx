@@ -125,6 +125,10 @@ const TOFFEE_QUIZ_QUESTIONS = [
 ];
 
 const CAMERA_PHOTOS = [
+  "/14.jpeg",
+  "/15.jpeg",
+  "/16.jpeg",
+  "/17.jpeg",
   "/IMG-20251215-WA0125.jpg",
   "/IMG-20251215-WA0126.jpg",
   "/IMG-20251215-WA0129.jpg",
@@ -139,6 +143,10 @@ const CAMERA_PHOTOS = [
 ];
 
 const CAMERA_PHOTO_CAPTIONS = [
+  "✨ New favorite memory unlocked! 💖",
+  "📸 Picture perfect moment! 🌟",
+  "🌸 Glowing like always! 🌸",
+  "🧸 Too cute to handle! 🧸",
   "✨ Cutest Angel Smile! 💖",
   "🌸 Elegant princess portrait 🌸",
   "🍰 Sweet retro scrapbook page 🍰",
@@ -419,6 +427,30 @@ const BirthdayPage = ({ isMusicPlaying, toggleMusic }) => {
     return (
       <div className="kawaii-grid-page min-h-screen w-full relative flex flex-col justify-start items-center py-12 px-6 overflow-x-hidden select-none animate-slide-up-kawaii" style={{ boxSizing: 'border-box' }}>
         
+        {/* Film Strip Left */}
+        <div className="film-strip-container film-strip-left">
+          <div className="film-track scroll-up">
+            {CAMERA_PHOTOS.map((src, i) => (
+              <div key={`left-a-${i}`} className="film-frame"><img src={src} alt="Memory" /></div>
+            ))}
+            {CAMERA_PHOTOS.map((src, i) => (
+              <div key={`left-b-${i}`} className="film-frame"><img src={src} alt="Memory" /></div>
+            ))}
+          </div>
+        </div>
+
+        {/* Film Strip Right */}
+        <div className="film-strip-container film-strip-right">
+          <div className="film-track scroll-down">
+            {CAMERA_PHOTOS.map((src, i) => (
+              <div key={`right-a-${i}`} className="film-frame"><img src={src} alt="Memory" /></div>
+            ))}
+            {CAMERA_PHOTOS.map((src, i) => (
+              <div key={`right-b-${i}`} className="film-frame"><img src={src} alt="Memory" /></div>
+            ))}
+          </div>
+        </div>
+
         {/* Inject CSS styling for flicker candle flame & custom overlays */}
         <style>{`
           @keyframes flicker {
