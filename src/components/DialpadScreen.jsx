@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { playDialTone, playErrorMelody } from '../utils/audio';
+import { CAMERA_PHOTOS } from './BirthdayPage';
 
 const DialpadScreen = ({ onCorrectCode, secretCode }) => {
   const [inputVal, setInputVal] = useState('');
@@ -86,7 +87,32 @@ const DialpadScreen = ({ onCorrectCode, secretCode }) => {
   const dialButtons = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '0', '#'];
 
   return (
-    <div className="vintage-card-wrapper">
+    <div className="vintage-card-wrapper relative">
+      
+      {/* Horizontal Film Strip Top */}
+      <div className="film-strip-horizontal film-strip-horizontal-top">
+        <div className="film-track-horizontal scroll-left">
+          {CAMERA_PHOTOS.map((src, i) => (
+            <div key={`top-a-${i}`} className="film-frame-horizontal"><img src={src} alt="Memory" /></div>
+          ))}
+          {CAMERA_PHOTOS.map((src, i) => (
+            <div key={`top-b-${i}`} className="film-frame-horizontal"><img src={src} alt="Memory" /></div>
+          ))}
+        </div>
+      </div>
+
+      {/* Horizontal Film Strip Bottom */}
+      <div className="film-strip-horizontal film-strip-horizontal-bottom">
+        <div className="film-track-horizontal scroll-right">
+          {CAMERA_PHOTOS.map((src, i) => (
+            <div key={`bot-a-${i}`} className="film-frame-horizontal"><img src={src} alt="Memory" /></div>
+          ))}
+          {CAMERA_PHOTOS.map((src, i) => (
+            <div key={`bot-b-${i}`} className="film-frame-horizontal"><img src={src} alt="Memory" /></div>
+          ))}
+        </div>
+      </div>
+
       {/* VINTAGE SCRAPBOOK CONTAINER CARD */}
       <div className="vintage-card">
         

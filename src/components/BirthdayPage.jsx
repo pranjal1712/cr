@@ -124,7 +124,7 @@ const TOFFEE_QUIZ_QUESTIONS = [
   }
 ];
 
-const CAMERA_PHOTOS = [
+export const CAMERA_PHOTOS = [
   "/14.jpeg",
   "/15.jpeg",
   "/16.jpeg",
@@ -1925,6 +1925,30 @@ const BirthdayPage = ({ isMusicPlaying, toggleMusic }) => {
   return (
     <div className="kawaii-grid-page min-h-screen w-full relative flex flex-col justify-center items-center py-10 px-6 overflow-x-hidden">
       
+      {/* Film Strip Left */}
+      <div className="film-strip-container film-strip-left">
+        <div className="film-track scroll-up">
+          {CAMERA_PHOTOS.map((src, i) => (
+            <div key={`left-a-main-${i}`} className="film-frame"><img src={src} alt="Memory" /></div>
+          ))}
+          {CAMERA_PHOTOS.map((src, i) => (
+            <div key={`left-b-main-${i}`} className="film-frame"><img src={src} alt="Memory" /></div>
+          ))}
+        </div>
+      </div>
+
+      {/* Film Strip Right */}
+      <div className="film-strip-container film-strip-right">
+        <div className="film-track scroll-down">
+          {CAMERA_PHOTOS.map((src, i) => (
+            <div key={`right-a-main-${i}`} className="film-frame"><img src={src} alt="Memory" /></div>
+          ))}
+          {CAMERA_PHOTOS.map((src, i) => (
+            <div key={`right-b-main-${i}`} className="film-frame"><img src={src} alt="Memory" /></div>
+          ))}
+        </div>
+      </div>
+
       {/* 1. CONFETTI BACKGROUND LAYER */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none', zIndex: 0, overflow: 'hidden' }}>
         {particles.map(p => (

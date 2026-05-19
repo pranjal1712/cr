@@ -1072,7 +1072,9 @@ html {
   top: 0;
   bottom: 0;
   width: 90px;
-  background-color: #111;
+  background-color: rgba(253, 114, 143, 0.45); /* Theme Pink with blur effect */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 1; /* Below the main popup modal */
   overflow: hidden;
   display: flex;
@@ -1080,11 +1082,11 @@ html {
 }
 .film-strip-left {
   left: 0;
-  border-right: 4px dashed rgba(255,255,255,0.4);
+  border-right: 2px dashed rgba(255,255,255,0.25);
 }
 .film-strip-right {
   right: 0;
-  border-left: 4px dashed rgba(255,255,255,0.4);
+  border-left: 2px dashed rgba(255,255,255,0.25);
 }
 
 .film-track {
@@ -1127,4 +1129,72 @@ html {
   height: 100%;
   object-fit: cover;
   filter: sepia(0.2) contrast(1.1); /* Subtle vintage look */
+}
+
+/* Horizontal Film Strip CSS for Dialpad Screen */
+.film-strip-horizontal {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background-color: rgba(253, 114, 143, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 5;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+}
+
+.film-strip-horizontal-top {
+  top: 0;
+  border-bottom: 2px dashed rgba(255,255,255,0.25);
+}
+
+.film-strip-horizontal-bottom {
+  bottom: 0;
+  border-top: 2px dashed rgba(255,255,255,0.25);
+}
+
+.film-track-horizontal {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  padding: 0 15px;
+  align-items: center;
+}
+
+.film-track-horizontal.scroll-left {
+  animation: scrollHorizontalLeft 45s linear infinite;
+}
+
+.film-track-horizontal.scroll-right {
+  animation: scrollHorizontalRight 45s linear infinite;
+}
+
+@keyframes scrollHorizontalLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scrollHorizontalRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.film-frame-horizontal {
+  width: 70px;
+  height: 70px;
+  flex-shrink: 0;
+  background-color: #fdfbfb;
+  padding: 3px;
+  border-radius: 4px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+}
+
+.film-frame-horizontal img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.2) contrast(1.1);
 }
