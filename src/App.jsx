@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import DialpadScreen from './components/DialpadScreen';
-import BirthdayPage from './components/BirthdayPage';
+import BirthdayPage, { CAMERA_PHOTOS } from './components/BirthdayPage';
 
 function App() {
   const [isUnlocked, setIsUnlocked] = useState(false);
@@ -18,7 +18,8 @@ function App() {
       '/Gemini_Generated_Image_n5a14tn5a14tn5a1.png',
       '/Gemini_Generated_Image_ywcbivywcbivywcb.png',
       '/penguin.png',
-      '/bear.png'
+      '/bear.png',
+      ...CAMERA_PHOTOS
     ];
     preloadImages.forEach(src => {
       const img = new Image();
