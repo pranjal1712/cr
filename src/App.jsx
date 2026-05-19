@@ -13,6 +13,18 @@ function App() {
 
   // Generate randomized floating birthday particles on component mount
   useEffect(() => {
+    // Preload heavy images in the background so they appear instantly when the vault opens
+    const preloadImages = [
+      '/Gemini_Generated_Image_n5a14tn5a14tn5a1.png',
+      '/Gemini_Generated_Image_ywcbivywcbivywcb.png',
+      '/penguin.png',
+      '/bear.png'
+    ];
+    preloadImages.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+
     const types = ['🎈', '✨', '💖', '⭐', '🍬'];
     const generated = Array.from({ length: 30 }).map((_, i) => ({
       id: i,
